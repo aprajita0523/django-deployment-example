@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+    <p></p>
+    <p></p>
+  </form>
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+  <p></p>
+  <p></p>
+  <h3>choose file structure</h3>
+  <select>
+    <option disabled = 'true' selected>file structure</option>
+    <option>structure 1</option>
+    <option>structure 2</option>
+    <option>structure 3</option>
+  </select>
+    <button type="submit">Generate file</button>
+{% endblock %}

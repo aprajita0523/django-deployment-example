@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="background-color:#ababa6">
+    <div class="container" style="padding:40px;margin:40px;border:1px solid #ccc;background-color:#dbd5bf">
+  <h1 style='font-family:Times Serif'>Ascii File Generator</h1>
+  <form action='upload' method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}
+<p></p><label for="Input_File1"><b>Input File1</b></label>
+    <input type="file" name="myfile1" required id="Input_File1" value=""><p></p><p></p><p></p>
+    <p></p><label for="Input_File2"><b>Input File2</b></label>
+        <input type="file" name="myfile2" required id="Input_File2" value=""><p></p><p></p><p></p>
+        <p></p>
+        <input type="radio" name="actionrequired" value="create"><b>Create</b>
+        <input type="radio" name="actionrequired" value="amend"><b>Amend</b>
+        <input type="radio" name="actionrequired" value="delete"><b>Delete</b>
+        <p></p>
+<p></p>
+<table class="table table-bordered datatable">
+    <thead style='background-color:#ababa6;border:1px'class="table-head">
+
+      <tr>
+        <th>Field 1</th>
+        <th>Field 2</th>
+        <th>Field 3</th>
+
+      </tr>
+    </thead>
+    <tbody>
+ <div id="items">
+
+
+  <td><input type="text" name="feild1" /></td>
+  <td><input type="text" name="feild2" />
+      <input type="hidden" name="cid" value="11" />
+      <input type="hidden" name="uid" value="12" />
+
+  </td>
+  <td><input type="text" name="feild3" /></td>
+ </div>
+
+    </tbody>
+
+  </table>
+    <p></p>
+     <input type="button" name="" value="Add Rows" id='add'>
+    <p></p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){
+       $("#add").click(function(e){
+         event.preventDefault()
+       $("#items").append('<div><td><input type="text" name="feild1" /></td><td><input type="text" name="feild2" /></td><td><input type="text" name="feild3" /></td></div>');
+     });
+
+     });
+   </script>
+    {{ form.as_p }}
+    <input type="submit" value="Upload file">
+    </form><hr>
+
+    <ul>
+      {% for model2 in model %}
+          <li>
+              <a href="{{ model2.upload_file.url }}">{{ model2.upload_file.name }}</a>
+              <small>({{ model2.upload_file.size|filesizeformat }}) - {{model2.upload_date}}</small>
+          </li>
+                {% endfor %}
+    </ul>
+    </div>
+  </body>
+</html>
